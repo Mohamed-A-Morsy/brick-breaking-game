@@ -1,0 +1,9 @@
+* {
+    font-family: 'Germania One';
+}
+
+html,
+body {
+    position: absolute;
+    width: 480px;
+}
