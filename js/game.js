@@ -26,7 +26,7 @@ function showGameStats(text, textX, textY, img, imgX, imgY){
     ctx.fillText(text, textX, textY);
     
     // draw image
-    ctx.drawImage(img, imgX, imgY, 30, 30);
+    // ctx.drawImage(img, imgX, imgY, 30, 30);
 }
 
 
@@ -49,8 +49,77 @@ function loop()
     requestAnimationFrame(loop);
 }
 loop();
+// paddle 
+    // create paddle
+    const PADDLE_WIDTH = 100;
+    const PADDLE_HEIGHT = 10;
+    const PADDLE_MARGIN_BOTTOM = 10;
+     const paddle ={
+        x: myCanvas.width/2 - PADDLE_WIDTH/2,
+        y: myCanvas.height - PADDLE_HEIGHT - PADDLE_MARGIN_BOTTOM,
+        width: PADDLE_WIDTH,
+        height: PADDLE_HEIGHT,
+        dx: 5,
+    }
+    // paddle.x
+    // paddle.y
+    // paddle.width
+    // paddle.height
+    // paddle.dx
+    //  drowing paddle
+function drawPaddle(){
+    ctx.fillStyle ="gray";
+    ctx.fillRect(paddle.x, paddle.y, paddle.width, paddle.height);
+    ctx.stockstyle = "yellow";
+    ctx.strokeRect(paddle.x, paddle.y, paddle.width, paddle.height);
+
+}
+// drawPaddle()
+// moving paddle
+let leftArrow = false;
+let rightArrow = false;
+document.addEventListener("keydown",function(e) {
+    console.log(e.keyCode==37)
+    if (e.keyCode == 37) {
+        leftArrow = true ;
+        
+    }else if (e.keyCode == 39){
+        rightArrow = true;
+
+    }
+});
+    document.addEventListener("keyup",function (event) {
+        if (event.keyCode == 37) {
+            leftArrow = false;
+            
+        } else if (event.keyCode == 39) {
+            rightArrow = false;
+            
+        }
+        
+    });
+
+    
+    function movePaddle() {
+        if (rightArrow ) {
+            paddle.x += paddle.dx;
+         
+        }else if (leftArrow && paddle.x > 0) {
+            paddle.x -= paddle.dx;
+        }
+        
+    }
 
 
+    function loops() {
+        // ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+        drawPaddle();
+        movePaddle();
+        // console.log("loopj")
+        requestAnimationFrame(loops);
+    }
+    loops();
+    
 
 
 
