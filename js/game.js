@@ -8,7 +8,7 @@ let isLevelDone = true;
 const max_level = 3;
 let SCORE = 0;
 const SCORE_UNIT = 10;
-const BALL_RADIUS = 12;
+const BALL_RADIUS = 8;
 
 //----------------------------------Sounds-------------------------------------------
 const Wall_Hit  = new Audio();
@@ -74,19 +74,12 @@ function draw() {
     showGameStats(LEVEL, myCanvas.width /2, 25, LEVEL_IMG, myCanvas.width / 2 - 30, 5);
 }
 
-function loop() {
 
-    ctx.drawImage(main_img, 0, 0, 650, 850);
-    draw();
-    ballBricksCollision();
-    requestAnimationFrame(loop);
-}
-loop();
 // paddle 
 // create paddle
 const PADDLE_WIDTH = 100;
 const PADDLE_HEIGHT = 10;
-const PADDLE_MARGIN_BOTTOM = 10;
+const PADDLE_MARGIN_BOTTOM = 60;
 const paddle = {
         x: myCanvas.width / 2 - PADDLE_WIDTH / 2,
         y: myCanvas.height - PADDLE_HEIGHT - PADDLE_MARGIN_BOTTOM,
@@ -146,7 +139,7 @@ const ball ={
     x:myCanvas.width / 2 ,
     y:paddle.y-BALL_RADIUS,
     radius:BALL_RADIUS,
-    speed:8,
+    speed:4,
     dx: 3 * (Math.random()* 2-1),
     dy:-3,
    } 
@@ -184,7 +177,7 @@ if(ball.y - ball.radius < 0){
    Wall_Hit.play();
 
    }
-if(ball.y + ball.radius > myCanvas.height){
+if(ball.y + ball.radius > myCanvas.height ){
     LIFE--;
     Life_Lost.play();
     resetBall();
@@ -219,30 +212,7 @@ function ballPaddleCollision(){
     ball.dy= -ball.speed * Math.cos(angle);
 }
 }
-//----------------------------------------------End-----------------------------------------------------
-//---------------------------------------------break bricks---------------------------------------------
-function ballBrickCollision(){
-    for(let r = 0;r < brick.row;r++ )
-{
-for(let c =0 ; c < brick.column;c++)
-{
-let b = bricks[r][c];
-if(b.status){
-    if(ball.x + ball.radius > b.x &&
-        ball.x - ball.radius <b.x + brick.width&&
-         ball.y + ball.radius > b.y &&
-         ball.y - ball.radius < b.y + brick.height)
-         {
-            Brick_Hit.play();
-            b.status =false;
-            ball.dy = -ball.dy;
-            SCORE+=SCORE_UNIT;
-         }
-           }
-}
-};
-}
-//----------------------------------------------End-----------------------------------------------------
+
 //----------------------------------------------Game over------------------------------------------------------
 function gameOver(){
     if(LIFE<=0){
@@ -252,29 +222,34 @@ function gameOver(){
 }
 //-------------------------------------------------End--------------------------------------------------------
 //-----------------------------------------------Level Up---------------------------------------
-function levelUp(){
 
-    for(let r = 0;r < brick.row;r++ )
-    {
-       for(let c =0 ; c < brick.column;c++)
-       {
-         isLevelDone = isLevelDone && ! bricks[r][c].status;
-       }
+function levelUp(){
+   
+    for(let r=0 ; r < brick.row ; r++){
+     
+      for(let c=0 ; c < brick.column ; c++){
+        isLevelDone = isLevelDone && !bricks[r][c].status;
+      }
     }
-    if(isLevelDone){
-        Win.play();
-         if(LEVEL >= max_level){
-            showYouWin();
-            GAME_OVER =true;
-           return;
-         }
-        brick.row ++;
-        createBricks();
-        ball.speed += .5;
-        resetBall();
-        LEVEL ++;
+  
+    if(isLevelDone == true){
+      Win.play();
+      if(LEVEL >= max_level){
+  
+           showYouWin();
+          GAME_OVER=true;
+          return;
+      }
+  
+      brick.row++;
+      createBricks();
+      ball.speed +=1;
+      resetBall();
+      LEVEL++;
     }
-}
+  
+   }
+  
 //---------------------------------------select sound element-------------------------------------------
 const soundElement =document.getElementById('sound');
 soundElement.addEventListener('click',controlAudio);
@@ -315,6 +290,8 @@ function showYouLose(){
 //-------------------------------------------------------------------------------------
 function loops() {
     // ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+    ctx.drawImage(main_img, 0, 0, 650, 850);
+    draw();
     drawPaddle();
     movePaddle();
     drawBall();
@@ -331,3 +308,4 @@ function loops() {
     }
 }
 loops();
+
