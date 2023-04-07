@@ -3,8 +3,8 @@
     let score = 0;
     let score_unit = 10;
     const brick = {
-        row: 4,
-        column: 9,
+        row: 1,
+        column: 2,
         width: 50,
         height: 15,
         offsetleft: 40,
