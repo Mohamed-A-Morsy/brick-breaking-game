@@ -4,12 +4,12 @@
     let score_unit = 10;
     const brick = {
         row: 2,
-        column: 9,
+        column: 6,
         width: 50,
         height: 15,
-        offsetleft: 20,
+        offsetleft: 40,
         offsettop: 30,
-        margintop: 20,
+        margintop: 30,
         fillcolor: '#32105D',
         strokecolor: 'gray'
     }
@@ -66,7 +66,8 @@
 
                     ctx.fillRect(b.x, b.y, brick.width, brick.height);
                 } else if (b.breakable == false) {
-                    ctx.fillStyle = '#9d7bc6';
+                    // ctx.fillStyle = '#9d7bc6';
+                    ctx.fillStyle = 'red';
                     ctx.fillRect(b.x, b.y, brick.width, brick.height);
                 }
             }
@@ -75,52 +76,55 @@
 
     // bricks interact  
 
-    function ballBricksCollision() {
-
-        for (let r = 0; r < brick.row; r++) {
-
-            for (let c = 0; c < brick.column; c++) {
-                const b = bricks[r][c];
-                if (b.status == true && b.breakable == true) {
-                    // if (ball.x + ball.raduis > b.x &&
-                    //     ball.x - ball.raduis < b.x + brick.width &&
-                    //     ball.y + ball.raduis > b.y &&
-                    //     ball.y - ball.raduis < b.y + brick.height) {
-                    //     // sound
-                    //     // brick_hit.play();
-                    //     ball.dy = -ball.dy;
-
-                    //     b.hit += 1;
+function ballBrickCollision(){
 
 
-                    //     if (b.hit == 2) {
-                    //         //sound 
+    for (let r = 0; r < brick.row; r++) {
+    
+        for (let c = 0; c < brick.column; c++) {
+            const b = bricks[r][c];
+            if (b.status == true && b.breakable == true) {
+                if (ball.x + ball.radius > b.x &&
+                    ball.x - ball.radius < b.x + brick.width &&
+                    ball.y + ball.radius > b.y &&
+                    ball.y - ball.radius < b.y + brick.height) {
+                    
+                    ball.dy = -ball.dy;
+                    Wall_Hit.play();
+                    b.hit += 1;
+    
+    
+                    if (b.hit == 2) {
+                       
+                        b.status = false;
+                        score += score_unit;
+    
+                    }
+    
+    
+                } 
+    
+            } else if (b.breakable == false) {
+    
+                
 
-                    //         // brick_brocken.play();  
-                    //         b.status = false;
-                    //         score += score_unit;
+                if (ball.x + ball.radius > b.x &&
+                    ball.x - ball.radius < b.x + brick.width &&
+                    ball.y + ball.radius > b.y &&
+                    ball.y - ball.radius < b.y + brick.height) {
+                    
+                    ball.dy = -ball.dy;
+                    Wall_Hit.play();
+    
+                   b.status =false;
 
-                    //     }
+    
+                } 
 
-
-                    // }  --> create ball then uncomment this part
-
-                } else if (b.breakable == false) {
-
-                    // if (ball.x + ball.raduis > b.x &&
-                    //     ball.x - ball.raduis < b.x + brick.width &&
-                    //     ball.y + ball.raduis > b.y &&
-                    //     ball.y - ball.raduis < b.y + brick.height) {
-
-                    //     brick_hit.play();
-                    //     ball.dy = -ball.dy;
-                    //     ball.dx = ball.dx;
-                    //     b.status = false;
-
-
-                    // }   --> create ball then uncomment this part
-
-                }
+                
+    
             }
         }
+    }
+    
     }
