@@ -3,14 +3,14 @@
     let score = 0;
     let score_unit = 10;
     const brick = {
-        row: 6,
+        row: 2,
         column: 9,
         width: 50,
         height: 15,
         offsetleft: 20,
         offsettop: 30,
         margintop: 20,
-        fillcolor: 'green',
+        fillcolor: '#32105D',
         strokecolor: 'gray'
     }
 
@@ -66,14 +66,12 @@
 
                     ctx.fillRect(b.x, b.y, brick.width, brick.height);
                 } else if (b.breakable == false) {
-                    ctx.fillStyle = 'red';
+                    ctx.fillStyle = '#9d7bc6';
                     ctx.fillRect(b.x, b.y, brick.width, brick.height);
                 }
             }
         }
     }
-
-
 
     // bricks interact  
 
