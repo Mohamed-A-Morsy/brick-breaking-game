@@ -291,7 +291,7 @@ Win.muted =win.muted ? false : true;
 }
 //-----------------------------------------------ENd sounds-----------------------------------------------
 //-----------------------------------------------handle game over img-------------------------------------------------------
-const gameOver =document.getElementById('gameOver');
+const gameover =document.getElementById('gameover');
 const youwon =document.getElementById('youwon');
 const youlose =document.getElementById('youlose');
 const restart =document.getElementById('restart');
@@ -303,13 +303,13 @@ restart.addEventListener("click",function(){
 //-------------------------------------------------------------------------------------------------
 //---------------------------------------------when you win----------------------------------------
 function showYouWin(){
-    gameOver.style.display ="block";
+    gameover.style.display ="block";
     youwon.style.display="block";
 }
 //-------------------------------------------------------------------------------------
 //---------------------------------------------when you lose----------------------------------------
 function showYouLose(){
-    gameOver.style.display ="block";
+    gameover.style.display ="block";
     youlose.style.display="block";
 }
 //-------------------------------------------------------------------------------------
