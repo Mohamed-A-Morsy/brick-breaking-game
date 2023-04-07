@@ -2,7 +2,7 @@
 let myCanvas = document.getElementById("break");
 let ctx = myCanvas.getContext("2d");
 let LEVEL = 1;
-let LIFE = 3;
+let LIFE = 5;
 let GAME_OVER = false;
 let isLevelDone = true;
 const max_level = 3;
@@ -77,7 +77,7 @@ function draw() {
 
 // paddle 
 // create paddle
-const PADDLE_WIDTH = 100;
+const PADDLE_WIDTH = 140;
 const PADDLE_HEIGHT = 10;
 const PADDLE_MARGIN_BOTTOM = 60;
 const paddle = {
@@ -139,7 +139,7 @@ const ball ={
     x:myCanvas.width / 2 ,
     y:paddle.y-BALL_RADIUS,
     radius:BALL_RADIUS,
-    speed:4,
+    speed:3,
     dx: 3 * (Math.random()* 2-1),
     dy:-3,
    } 
@@ -165,7 +165,7 @@ function moveBall(){
 //----------------------------------------------End-----------------------------------------------------
 //-------------------------------to prevent the Ball to go out the canvas------------------------------
 function ballWallCollision(){
-    let LIFE=3;
+   
 
     if(ball.x +ball.radius > myCanvas.width||ball.x-ball.radius < 0){
        ball.dx= -ball.dx;
@@ -223,15 +223,16 @@ function gameOver(){
 //-------------------------------------------------End--------------------------------------------------------
 //-----------------------------------------------Level Up---------------------------------------
 
-function levelUp(){
+function level3p(){
    
     for(let r=0 ; r < brick.row ; r++){
      
       for(let c=0 ; c < brick.column ; c++){
-        isLevelDone = isLevelDone && !bricks[r][c].status;
+        isLevelDone = isLevelDone && ! bricks[r][c].status;
       }
+     
     }
-  
+    console.log(isLevelDone);
     if(isLevelDone == true){
       Win.play();
       if(LEVEL >= max_level){
@@ -249,6 +250,35 @@ function levelUp(){
     }
   
    }
+
+   function levelUp(){
+    let levelisdone =true;
+  
+    for(let r=0 ; r < brick.row ; r++){
+     
+      for(let c=0 ; c < brick.column ; c++){
+        levelisdone = levelisdone && !bricks[r][c].status;
+      }
+    }
+  
+    if(levelisdone == true){
+     
+      if(LEVEL >= max_level){
+  
+           showYouWin();
+        GAME_OVER=true;
+          return;
+      }
+  
+      brick.row++;
+      createBricks();
+      ball.speed +=1;
+      resetBall();
+      LEVEL++;
+    }
+  
+   }
+  
   
 //---------------------------------------select sound element-------------------------------------------
 const soundElement =document.getElementById('sound');

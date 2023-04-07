@@ -3,8 +3,8 @@
     let score = 0;
     let score_unit = 10;
     const brick = {
-        row: 2,
-        column: 6,
+        row: 4,
+        column: 9,
         width: 50,
         height: 15,
         offsetleft: 40,
@@ -97,7 +97,7 @@ function ballBrickCollision(){
                     if (b.hit == 2) {
                        
                         b.status = false;
-                        score += score_unit;
+                        SCORE += SCORE_UNIT;
     
                     }
     
