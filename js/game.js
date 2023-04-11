@@ -318,7 +318,7 @@ function showYouLose(){
     youlose.style.display="block";
 }
 //-------------------------------------------------------------------------------------
-function loops() {
+function loop() {
     // ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
     ctx.drawImage(main_img, 0, 0, 650, 850);
     draw();
@@ -337,5 +337,5 @@ function loops() {
         requestAnimationFrame(loops);
     }
 }
-loops();
+loop();
 
