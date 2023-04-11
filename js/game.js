@@ -65,9 +65,7 @@ function draw() {
     // SHOW SCORE
     showGameStats(SCORE, 35, 25, SCORE_IMG, 5, 5);
     // SHOW LIVES
-    // ctx.drawImage(LIFE_IMG, 610, 10, 30, 30);
-    // ctx.drawImage(LIFE_IMG, 570, 10, 30, 30);
-    // ctx.drawImage(LIFE_IMG, 530, 10, 30, 30);
+    
     showGameStats(LIFE, myCanvas.width - 25, 25, LIFE_IMG, myCanvas.width-55, 5); 
 
     // SHOW LEVEL
